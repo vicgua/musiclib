@@ -1,10 +1,10 @@
 import sqlite3
 import logging
-import youtube_dl
 import os.path
 import glob
 from .._metadata_analyser import set_metadata
 from .._types import Song
+from ...exceptions import RequiresYtdlError
 
 SELECT_ALL_DATA = """
     SELECT title, artist, album, download_url
@@ -27,6 +27,10 @@ def change_extension(video_filename: str) -> str:
     return glob.glob(globbed_filename)[0]
 
 def do_download(database: str):
+    try:
+        import youtube_dl
+    except ModuleNotFoundError as mnf_err:
+        raise RequiresYtdlError from mnf_err
     con = sqlite3.connect(database)
     total = con.execute(SELECT_COUNT).fetchone()[0]
     ytdl_opts = {

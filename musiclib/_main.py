@@ -8,7 +8,7 @@ from .operations import list as op_list
 from .operations import remove as op_remove
 from .operations import url as op_url
 
-from .exceptions import CommandError, UnexpectedValueError
+from .exceptions import CommandError, UnexpectedValueError, RequiresYtdlError
 
 
 def not_implemented(parser, args):
@@ -178,3 +178,5 @@ def main():
         args.func(p, args)
     except CommandError as ce:
         p.error(ce)
+    except RequiresYtdlError:
+        p.error("this feature requires youtube-dl. Please install musiclib[download]")

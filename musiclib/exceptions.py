@@ -1,7 +1,7 @@
 class CommandError(Exception):
     pass
 
-class RequiresYdlError(Exception):
+class RequiresYtdlError(Exception):
     pass
 
 class UnexpectedValueError(Exception):
