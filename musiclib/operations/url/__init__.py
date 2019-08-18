@@ -59,7 +59,6 @@ def get_raw(database: str, file: TextIO) -> None:
 def template(database: str, file: TextIO) -> None:
     con = sqlite3.connect(database)
     cur = con.execute(MAKE_TEMPLATE)
-    #quoted_res = list(map(lambda r: list(map(shlex.quote, r[0:3])), cur.fetchall()))
     TITLE_PLACEHOLDER = "<title>"
     ARTIST_PLACEHOLDER = "<artist>"
     URL_PLACEHOLDER = "<download url>"

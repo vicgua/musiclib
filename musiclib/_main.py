@@ -141,7 +141,7 @@ def main():
 
     url_get_parser = url_subparsers.add_parser('get', help="print the URL list")
     url_get_parser.set_defaults(url_mode='get')
-    url_get_parser.add_argument('dest', nargs='?', type=argparse.FileType('w'), default=None,
+    url_get_parser.add_argument('dest', nargs='?', type=argparse.FileType('w'), default='-',
         help="write the URL list to this file. Standard output by default")
     url_get_parser.add_argument('--format', '-f', choices=("youtube-dl", "raw"), default="youtube-dl",
         help="youtube-dl (the default) will print a human-readable, youtube-dl"
@@ -160,11 +160,6 @@ def main():
     url_download_parser = url_subparsers.add_parser('download', aliases=['dl'],
         help="download all URLs and apply the metadata")
     url_download_parser.set_defaults(url_mode='download')
-
-    # apply_parser = subparsers.add_parser(
-    #     "apply", help="recover and apply all metadata from the database"
-    # )
-    # apply_parser.set_defaults(func=not_implemented, parser=apply_parser)
 
     args = parser.parse_args()
     try:
